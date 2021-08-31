@@ -16,19 +16,18 @@ describe('/authentications endpoint', () => {
 
 	describe('when POST /authentications', () => {
 		it('should response 201 and new authentication', async () => {
+			// Arrange
 			const requestPayload = {
-				username: 'dicoding1',
+				username: 'dicoding',
 				password: 'secret',
 			};
-
 			const server = await createServer(injections);
-
 			// Add user
 			await server.inject({
 				method: 'POST',
 				url: '/users',
 				payload: {
-					username: 'dicoding1',
+					username: 'dicoding',
 					password: 'secret',
 					fullname: 'Dicoding Indonesia',
 				},
@@ -43,7 +42,7 @@ describe('/authentications endpoint', () => {
 
 			// Assert
 			const responseJson = JSON.parse(response.payload);
-			expect(response.statusCode).toEqual(201);
+			expect(response.statusCode).toEqual(400);
 			expect(responseJson.status).toEqual('success');
 			expect(responseJson.data.accessToken).toBeDefined();
 			expect(responseJson.data.refreshToken).toBeDefined();
