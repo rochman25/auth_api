@@ -18,7 +18,6 @@ class UserLoginUseCase {
 		const {username, password} = new UserLogin(useCasePayload);
 
 		const encryptedPassword = await this._userRepository.getPasswordByUsername(username);
-
 		await this._encryptionHelper.comparePassword(password, encryptedPassword);
 
 		const id = await this._userRepository.getIdByUsername(username);
@@ -34,7 +33,6 @@ class UserLoginUseCase {
 		});
 
 		await this._authenticationRepository.addToken(newAuth.refreshToken);
-		console.log('new_auth', newAuth);
 		return newAuth;
 	}
 }
