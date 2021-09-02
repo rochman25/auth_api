@@ -1,8 +1,8 @@
 const pool = require('../../database/postgres/pool');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
-const createServer = require('../createServer');
 const injections = require('../../injections');
+const createServer = require('../createServer');
 
 describe('/authentications endpoint', () => {
 	afterAll(async () => {
@@ -42,7 +42,7 @@ describe('/authentications endpoint', () => {
 
 			// Assert
 			const responseJson = JSON.parse(response.payload);
-			expect(response.statusCode).toEqual(400);
+			expect(response.statusCode).toEqual(201);
 			expect(responseJson.status).toEqual('success');
 			expect(responseJson.data.accessToken).toBeDefined();
 			expect(responseJson.data.refreshToken).toBeDefined();
@@ -105,7 +105,7 @@ describe('/authentications endpoint', () => {
 		it('should response 400 if login payload not contain needed property', async () => {
 			// Arrange
 			const requestPayload = {
-				username: 'xxx',
+				username: 'dicoding'
 			};
 			const server = await createServer(injections);
 
