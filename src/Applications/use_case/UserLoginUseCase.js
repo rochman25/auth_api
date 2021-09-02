@@ -26,7 +26,7 @@ class UserLoginUseCase {
 			.createAccessToken({username, id});
 		const refreshToken = await this._authenticationTokenManager
 			.createRefreshToken({username, id});
-		console.log(accessToken, refreshToken);
+
 		const newAuth = new NewAuth({
 			accessToken,
 			refreshToken,
