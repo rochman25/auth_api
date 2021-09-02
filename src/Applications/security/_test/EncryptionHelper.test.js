@@ -5,5 +5,6 @@ describe('EncryptionHelper interface', () => {
 		const encryptionHelper = new EncryptionHelper();
 
 		await expect(encryptionHelper.encryptPassword('dummy_password')).rejects.toThrowError('ENCRYPTION_HELPER.METHOD_NOT_IMPLEMENTED');
+		await expect(encryptionHelper.comparePassword('plain','encrypted')).rejects.toThrowError('ENCRYPTION_HELPER.METHOD_NOT_IMPLEMENTED');
 	});
 });
