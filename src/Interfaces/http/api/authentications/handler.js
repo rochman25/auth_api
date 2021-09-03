@@ -2,12 +2,15 @@ class AuthenticationsHandler {
 	constructor({
 		userLoginUseCase,
 		refreshAuthenticationUseCase,
+		logoutAuthenticationUseCase,
 	}) {
 		this._userLoginUseCase = userLoginUseCase;
 		this._refreshAuthenticationUseCase = refreshAuthenticationUseCase;
+		this._logoutAuthenticationUseCase = logoutAuthenticationUseCase;
 
 		this.postAuthenticationHandler = this.postAuthenticationHandler.bind(this);
 		this.putAuthenticationHandler = this.putAuthenticationHandler.bind(this);
+		this.deleteAuthenticationHandler = this.deleteAuthenticationHandler.bind(this);
 	}
 
 	async postAuthenticationHandler(request, h) {
@@ -32,6 +35,13 @@ class AuthenticationsHandler {
 			data: {
 				accessToken,
 			},
+		};
+	}
+
+	async deleteAuthenticationHandler(request) {
+		await this._logoutAuthenticationUseCase.execute(request.payload);
+		return {
+			status: 'success',
 		};
 	}
 }
